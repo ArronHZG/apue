@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><!-- $ZEUUX -->
+
+
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="learning-gcc.cn_files/zeuux.htm" title="ZEUUX Project style"><title>学习gcc－文档－哲思自由软件社区</title></head><body>
+<script src="learning-gcc.cn_files/header.htm" language="javascript" type="text/javascript"></script>  
+<div class="main">
+<div class="big_content" auto-index="true">
+
+<hr size="5">
+<table cellpadding="4" width="100%">
+  <tbody>
+    <tr>
+        <td valign="top">
+      <h1><div align="center">学习使用 GNU  C and C++ Compiler</div></h1>
+	<p></p><div align="center">作者：<a href="mailto:wangcong@zeuux.org?subject=Questions%20about%20gcc%20doc">王聪</a></div>
+      GCC 参考手册
+      <ul>
+      <li><a linkindex="0" href="#GCC_USAGE">GCC 的使用</a></li>
+      <li><a linkindex="1" href="#GCC_ARGS">GCC 常用选项</a></li>
+      <li><a linkindex="2" href="#GCC_OTHER_ARGS">其它 GCC 选项</a></li>
+      <li><a linkindex="3" href="#BOOKS">相关书籍</a></li>
+      <li><a linkindex="4" href="#LINKS">相关链接</a></li>
+      </ul>
+      <p>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a name="GCC_USAGE"></a>
+<p>
+</p>
+<hr>
+<table border="1" cellpadding="4" cellspacing="1" width="100%">
+
+  <tbody>
+    <tr>
+      <td>
+      <table border="0" cellpadding="2" cellspacing="0" width="100%">
+      <tbody>
+      <tr>
+      <td><b><big>GCC 的使用 </big></b></td>
+      </tr>
+      </tbody>
+      </table>
+
+      <p> 
+GCC 编译过程示意图：
+      </p>
+      <ul>
+<img src="learning-gcc.cn_files/gcc-compile.jpg"><br>
+      </ul>
+用法：
+	<pre>       gcc [-c│-S│-E] [-std=standard]
+           [-g] [-pg] [-Olevel]
+           [-Wwarn...] [-pedantic]
+           [-Idir...] [-Ldir...]
+           [-Dmacro[=defn]...] [-Umacro]
+           [-foption...] [-mmachine-option...]
+           [-o outfile] infile...
+</pre>
+<a name="GCC_ARGS"></a>
+<hr>
+      <table border="0" cellpadding="2" cellspacing="0" width="100%">
+      <tbody>
+      <tr>
+      <td><b><big>GCC 常用选项 </big></b></td>
+      </tr>
+      </tbody>
+      </table>
+
+      <dl>
+        <dd>
+          <table border="1">
+            <tbody>
+              <tr bgcolor="#c0c0c0">
+                <th>选项</th>
+                <th>含义</th>
+              </tr>
+
+              <tr>
+                <td valign="top">--help <br> --target-help </td>
+                <td valign="top">显示 gcc 帮助说明。‘target-help’是显示目标机器特定的命令行选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> --version </td>
+                <td valign="top">显示 gcc 版本号和版权信息 。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -o <i>outfile</i></td>
+                <td valign="top">输出到指定的文件。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -x <i>language</i></td>
+                <td valign="top">指明使用的编程语言。允许的语言包括：c c++ assembler none 。
+                           ‘none’意味着恢复默认行为，即根据文件的扩展名猜测源文件的语言。
+</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -v </td>
+                <td valign="top">打印较多信息，显示编译器调用的程序。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -### </td>
+                <td valign="top">与 -v 类似，但选项被引号括住，并且不执行命令。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -E </td>
+                <td valign="top">仅作预处理，不进行编译、汇编和链接。如上图所示。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -S </td>
+                <td valign="top">仅编译到汇编语言，不进行汇编和链接。如上图所示。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -c </td>
+                <td valign="top">编译、汇编到目标代码，不进行链接。如上图所示。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -pipe </td>
+                <td valign="top">使用管道代替临时文件。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -combine </td>
+                <td valign="top">将多个源文件一次性传递给汇编器。</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </dd>
+      </dl>
+
+      <a name="GCC_OTHER_ARGS"></a>
+      <p> 
+      </p>
+      <hr>
+      <table border="0" cellpadding="2" cellspacing="0" width="100%">
+      <tbody>
+      <tr>
+      <td><b><big>其它 GCC 选项 </big></b></td>
+      </tr>
+      </tbody>
+      </table>
+
+      <p> 
+其它有用的 GCC 选项：
+      </p>
+      <p> 
+      </p>
+      <dl>
+        <dd>
+          <table border="1">
+
+            <tbody>
+              <tr bgcolor="#c0c0c0">
+                <th>命令</th>
+                <th>描述</th>
+              </tr>
+
+              <tr>
+                <td valign="top">-l <i>library</i><br>-l<i>library</i></td>
+                <td valign="top">进行链接时搜索名为library的库。<br>例子： $ gcc test.c -lm -o test</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-I<i>dir</i></td>
+                <td valign="top">把<i>dir</i>加入到搜索头文件的路径列表中。<br>例子： $ gcc test.c -I../inc -o test</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-L<i>dir</i></td>
+                <td valign="top">把<i>dir</i>加入到搜索库文件的路径列表中。<br>例子： $ gcc -I/home/foo -L/home/foo -ltest test.c -o test</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-D<i>name</i></td>
+                <td valign="top">预定义一个名为<i>name</i>的宏，值为1。<br>例子： $ gcc -DTEST_CONFIG test.c -o test</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-D<i>name</i>=<i>definition</i></td>
+                <td valign="top">预定义名为<i>name</i>，值为<i>definition</i>的宏。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-ggdb <br> -ggdb<i>level</i> </td>
+                <td valign="top">为调试器 gdb 生成调试信息。<i>level</i>可以为1，2，3，默认值为2。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-g <br> -g<i>level</i> </td>
+                <td valign="top">生成操作系统本地格式的调试信息。-g 和 -ggdb 并不太相同， -g 会生成 gdb 之外的信息。<i>level</i>取值同上。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -s </td>
+                <td valign="top">去除可执行文件中的符号表和重定位信息。用于减小可执行文件的大小。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -M </td>
+                <td valign="top">告
+诉预处理器输出一个适合make的规则，用于描述各目标文件的依赖关系。对于每个源文件，预处理器输出
+一个make规则，该规则的目标项(target)是源文件对应的目标文件名，依赖项(dependency)是源文件中
+`#include引用的所有文件。生成的规则可
+以是单行，但如果太长，就用`\'-换行符续成多行。规则 显示在标准输出，不产生预处理过的C程序。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -C </td>
+                <td valign="top">告诉预处理器不要丢弃注释。配合`-E'选项使用。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -P </td>
+                <td valign="top">告诉预处理器不要产生`#line'命令。配合`-E'选项使用。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -static </td>
+                <td valign="top">在支持动态链接的系统上，阻止连接共享库。该选项在其它系统上
+无效。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -nostdlib </td>
+                <td valign="top">不连接系统标准启动文件和标准库文件，只把指定的文件传递给连接器。</td>
+              </tr>
+
+              <tr bgcolor="#c0c0c0">
+                <th>Warnings </th>
+                <th><br>
+                </th>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wall </td>
+                <td valign="top">会打开一些很有用的警告选项，建议编译时加此选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -W <br>-Wextra </td>
+                <td valign="top">打印一些额外的警告信息。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -w </td>
+                <td valign="top">禁止显示所有警告信息。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wshadow </td>
+                <td valign="top">当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wpointer-arith </td>
+                <td valign="top">对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会打开此项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wcast-qual </td>
+                <td valign="top">当强制转化丢掉了类型修饰符时给出警告。 -Wall 并不会打开此项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Waggregate-return </td>
+                <td valign="top">如果定义或调用了返回结构体或联合体的函数，编译器就发出警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Winline </td>
+                <td valign="top">无论是声明为 inline 或者是指定了-finline-functions 选项，如果某函数不能内联，编译器都将发出警告。如果你的代码含有很多 inline 函数的话，这是很有用的选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Werror </td>
+                <td valign="top">把警告当作错误。出现任何警告就放弃编译。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wunreachable-code </td>
+                <td valign="top">如果编译器探测到永远不会执行到的代码，就给出警告。也是比较有用的选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wcast-align </td>
+                <td valign="top">一旦某个指针类型强制转换导致目标所需的地址对齐增加时，编译器就发出警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wundef </td>
+                <td valign="top">当一个没有定义的符号出现在 #if 中时，给出警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wredundant-decls </td>
+                <td valign="top">如果在同一个可见域内某定义多次声明，编译器就发出警告，即使这些重复声明有效并且毫无差别。</td>
+              </tr>
+
+              <tr bgcolor="#c0c0c0">
+                <th>Optimization </th>
+                <th><br>
+                </th>
+              </tr>
+
+              <tr>
+                <td valign="top">-O0 </td>
+                <td valign="top">禁止编译器进行优化。默认为此项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-O <br> -O1 </td>
+                <td valign="top">尝试优化编译时间和可执行文件大小。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-O2 </td>
+                <td valign="top">更多的优化，会尝试几乎全部的优化功能，但不会进行“空间换时间”的优化方法。</td>
+              </tr>
+
+
+              <tr>
+                <td valign="top">-O3 </td>
+                <td valign="top">在 -O2 的基础上再打开一些优化选项：-finline-functions， -funswitch-loops 和 -fgcse-after-reload 。</td>
+              </tr>
+
+
+              <tr>
+                <td valign="top">-Os </td>
+                <td valign="top">对生成文件大小进行优化。它会打开 -O2 开的全部选项，除了会那些增加文件大小的。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-finline-functions </td>
+                <td valign="top">把所有简单的函数内联进调用者。编译器会探索式地决定哪些函数足够简单，值得做这种内联。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fstrict-aliasing </td>
+                <td valign="top">施加最强的别名规则（aliasing rules）。</td>
+              </tr>
+
+
+              <tr bgcolor="#c0c0c0">
+                <th>Standard </th>
+                <th><br>
+                </th>
+              </tr>
+
+              <tr>
+                <td valign="top"> -ansi </td>
+                <td valign="top">支持符合ANSI标准的C程序。这样就会关闭GNU C中某些不兼容ANSI C的特性。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -std=c89 <br> -iso9899:1990 </td>
+                <td valign="top">指明使用标准 ISO C90 作为标准来编译程序。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -std=c99 <br> -std=iso9899:1999 </td>
+                <td valign="top">指明使用标准 ISO C99 作为标准来编译程序。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -std=c++98 </td>
+                <td valign="top">指明使用标准 C++98 作为标准来编译程序。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-std=gnu9x <br> -std=gnu99 </td>
+                <td valign="top">使用 ISO C99 再加上 GNU 的一些扩展。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fno-asm </td>
+                <td valign="top">不把asm, inline或typeof当作关键字，因此这些词可以用做标识符。用 __asm__， __inline__和__typeof__能够替代它们。 `-ansi' 隐含声明了`-fno-asm'。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fgnu89-inline </td>
+                <td valign="top">告诉编译器在 C99 模式下看到 inline 函数时使用传统的 GNU 句法。</td>
+              </tr>
+
+              <tr bgcolor="#c0c0c0">
+                <th> C options </th>
+                <th><br>
+                </th>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fsigned-char <br> -funsigned-char </td>
+                <td valign="top">把char定义为有/无符号类型，如同signed char/unsigned char。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -traditional </td>
+                <td valign="top">尝试支持传统C编译器的某些方面。详见GNU C手册。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fno-builtin <br> -fno-builtin-function </td>
+                <td valign="top">不接受没有 __builtin_ 前缀的函数作为内建函数。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -trigraphs </td>
+                <td valign="top">支持ANSI C的三联符（ trigraphs）。`-ansi'选项隐含声明了此选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -fsigned-bitfields <br> -funsigned-bitfields </td>
+                <td valign="top">如果没有明确声明`signed'或`unsigned'修饰符，这些选项用来定义有符号位域或无符号位域。缺省情况下，位域是有符号的，因为它们继承的基本整数类型，如int，是有符号数。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wstrict-prototypes </td>
+                <td valign="top">如果函数的声明或定义没有指出参数类型，编译器就发出警告。很有用的警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wmissing-prototypes </td>
+                <td valign="top">如果没有预先声明就定义了全局函数，编译器就发出警告。即使函数定义自身提供了函数原形也会产生这个警告。这个选项 的目的是检查没有在头文件中声明的全局函数。</td>
+              </tr>
+
+	      <tr>
+		<td valign="top"> -Wnested-externs </td>
+		<td valing="top">如果某extern声明出现在函数内部，编译器就发出警告。</td>
+		</tr>
+
+              <tr bgcolor="#c0c0c0">
+                <th>C++ options </th>
+                <th><br>
+                </th>
+              </tr>
+
+<tr>
+<td valign="top"> -ffor-scope </td>
+<td valign="top"> 从头开始执行程序，也允许进行重定向。</td>
+</tr>
+
+<tr>
+<td valign="top"> -fno-rtti </td>
+<td valign="top">关闭对 dynamic_cast 和 typeid 的支持。如果你不需要这些功能，关闭它会节省一些空间。</td>
+</tr>
+
+            <tr>
+                <td valign="top"> -Wctor-dtor-privacy </td>
+                <td valign="top">当一个类没有用时给出警告。因为构造函数和析构函数会被当作私有的。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wnon-virtual-dtor </td>
+                <td valign="top"> 当一个类有多态性，而又没有虚析构函数时，发出警告。-Wall会开启这个选项。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wreorder </td>
+                <td valign="top">如果代码中的成员变量的初始化顺序和它们实际执行时初始化顺序不一致，给出警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Wno-deprecated </td>
+                <td valign="top">使用过时的特性时不要给出警告。</td>
+              </tr>
+
+              <tr>
+                <td valign="top"> -Woverloaded-virtual </td>
+                <td valign="top">如果函数的声明隐藏住了基类的虚函数，就给出警告。</td>
+              </tr>
+
+              <tr bgcolor="#c0c0c0">
+                <th>Machine Dependent Options (Intel)</th>
+                <th><br>
+                </th>
+              </tr>
+
+              <tr>
+                <td valign="top"> -mtune=<i>cpu-type</i></td>
+                <td valign="top"> 为指定类型的 CPU 生成代码。<i>cpu-type</i>可以是：i386，i486，i586，pentium，i686，pentium4 等等。</td>
+              </tr>
+
+              <tr>
+                <td valign="top">-msse <br> -msse2 <br> -mmmx <br> -mno-sse <br> -mno-sse2 <br> -mno-mmx</td>
+                <td valign="top">使用或者不使用MMX，SSE，SSE2指令。</td>
+              </tr>
+              <tr>
+                <td valign="top"> -m32 <br> -m64 </td>
+                <td valign="top">生成32位/64位机器上的代码。</td>
+              </tr>
+              <tr>
+                <td valign="top"> -mpush-args <br> -mno-push-args </td>
+                <td valign="top">（不）使用 push 指令来进行存储参数。默认是使用。</td>
+              </tr>
+              <tr>
+                <td valign="top"> -mregparm=<i>num</i> </td>
+                <td valign="top">当传递整数参数时，控制所使用寄存器的个数。</td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </dd>
+      </dl>
+
+      <p> 
+      </p>
+
+<a name="BOOKS"></a>
+<hr>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td><b><big>GCC 相关书籍：</big></b></td>
+</tr>
+</tbody>
+</table>
+
+      <p> 
+      </p>
+      <ul>
+        <li><a linkindex="5" href="http://www.amazon.com/GCC-Complete-Reference-Arthur-Griffith/dp/0072224053">GCC: The Complete Reference</a>
+        </li>
+        <li><a linkindex="6" href="http://www.amazon.com/GNU-Linux-Application-Programming-Second/dp/1584505680">GNU/Linux Application Programming</a>
+        </li>
+        <li><a linkindex="7" href="http://www.wrox.com/WileyCDA/WroxTitle/productCd-0764544977.html">Beginning Linux Programming, 3rd Edition</a>
+        </li>
+        <li><a linkindex="8" href="http://www.oreilly.com/catalog/9780596009588/">Linux System Programming</a>
+        </li>
+      </ul>
+
+
+<a name="LINKS"></a>
+<p>
+</p>
+<hr>
+<table border="0" cellpadding="2" cellspacing="0" width="100%">
+<tbody>
+<tr>
+<td><b><big>相关链接：</big></b></td>
+</tr>
+</tbody>
+</table>
+      <p>
+      </p>
+      <ul>
+        <li><a linkindex="9" href="http://gcc.gnu.org/">GCC offical site</a>
+        </li>
+        <li><a linkindex="10" href="http://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/">Using the GNU Compiler Collection (GCC)</a>
+        </li>
+	<li><a linkindex="11" href="http://node1.yo-linux.com/cgi-bin/man2html?cgi_command=gcc">GCC man page</a>
+        </li>
+	<li><a linkindex="12" href="http://web2.clarkson.edu/class/cs241/labs/lab_1/using_gcc.html">GCC quick reference</a>
+	</li>
+	<li><a linkindex="13" href="http://tigcc.ticalc.org/doc/comopts.html">GCC Command-Line Options</a>
+        </li> 
+	<li><a linkindex="14" href="http://www.cs.utah.edu/dept/old/texinfo/gcc/gcc_toc.html">Using and Porting GNU CC</a>
+        </li> 
+      </ul>
+
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+</div>
+<br clear="all">
+<script src="learning-gcc.cn_files/footer.htm" language="javascript" type="text/javascript"></script>  
+<script src="learning-gcc.cn_files/urchin.js" type="text/javascript"></script>  
+<script type="text/javascript">
+_uacct = "UA-468239-3";
+urchinTracker();
+</script>
+</body></html>
